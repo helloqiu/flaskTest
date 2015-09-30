@@ -6,3 +6,12 @@
 	min-height: 700px;
 
 }
+.login-panel{
+	background-color: #FFFFFF;
+	border: 3px solid #dedede;
+	-webkit-border-radius:15px;
+	-moz-border-radius:15px;
+	border-radius:15px;
+	max-width: 600px;
+	padding: 25px 100px 10px;
+}
