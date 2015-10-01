@@ -5,7 +5,10 @@ def register(username , password):
 	rv = cur.fetchall()
 	cur.close()
 	if not rv:
-		#regist
+		query = 'insert into user values(\'' + username + '\',\'' + password + '\')';
+		db = sqlite3_db.connect_db()
+		db.execute(query)
+		db.commit()
 		return True
 	else:
 		return False
