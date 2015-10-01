@@ -1,7 +1,11 @@
 from app import app
-from flask import render_template
+from flask import render_template request
+
 
 @app.route('/')
-@app.route('/index')
-def index():
-	return render_template("test.html")
+@app.route('/login',method=['GET' , 'POST'])
+def login():
+	if request.method == 'GET':
+		return render_template("test.html")
+	elif request.method == 'POST':
+		
