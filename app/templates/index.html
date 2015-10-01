@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "bootstrap/base.html" %}
 
-	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../static/custom.css">
-   	
-   	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-   	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	<title>OnlineQiu-Login</title>
-</head>
+{% block html_attribs %} lang="zh-CN"{% endblock %}
 
-<body>
+{% block title %}test{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='custom.css')}}">
+{% endblock %}
+{% block navbar %}
 	<nav role="navigation" class="navbar navbar-inverse">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
-					<span class="icon-bar" ></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+				<span class="icon-bar" ></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
 			<a href="#" class="navbar-brand">OnlineQiu</a>
 		</div>
@@ -34,6 +30,9 @@
 			</ul>
 		</div>
 	</nav>
+{% endblock %}
+
+{% block content %}
 	<main role="main">
 		<div class="login-container">
 			<div style="min-height:100px;" class="hidden-xs"></div>
@@ -42,13 +41,13 @@
 					<div class="text-center">
 						<h1>Login</h1>
 					</div>
-					<form class="bs-example bs-example-form" role="form">
+					<form class="bs-example bs-example-form" role="form" method="postindex">
 						<div style="padding:12px 0 12px;">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-user"></span>
 								</span>
-								<input type="text" class="form-control" placeholder="username"></input>
+								<input type="text" class="form-control" placeholder="username" name="username"></input>
 							</div>
 						</div>
 						<div style="padding:12px 0 12px;">
@@ -56,11 +55,11 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-star-empty"></span>
 								</span>
-								<input type="password" class="form-control" placeholder="password"></input>
+								<input type="password" class="form-control" placeholder="password" name="password"></input>
 							</div>
 						</div>
 						<div style="padding:20px 0 10px;">
-							<button type="button" class="btn btn-success btn-lg btn-block">登陆</button>
+							<button type="submit" class="btn btn-success btn-lg btn-block">登陆</button>
 						</div>
 						<div style="padding:10px 0 10px;">
 							<button type="button" class="btn btn-info btn-lg btn-block">注册</button>
@@ -70,4 +69,4 @@
 			</div>
 		</div>
 	</main>
-</body>
+{% endblock %}
