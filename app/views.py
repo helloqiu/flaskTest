@@ -44,8 +44,19 @@ def user_dash_view():
 	if request.method == 'POST':
 		return render_template('user_dashboard.html' , users=data)
 
-@app.route('/question/1', methods=['GET' , 'POST'])
-def question():
-	data=getQuestion.get_question('1')
+@app.route('/question/<int:kind>', methods=['GET' , 'POST'])
+def question(kind):
+	data=getQuestion.get_question('%d' %kind )
 	if request.method == 'GET':
-		return render_template('question_list.html' , question_kind='题目1' , questions = data , kind=1)
+		return render_template('question_list.html' , question_kind='题目' + '%d' %kind, questions = data , kind=kind)
+
+@app.route('/question/id/<int:id>', methods=['GET' , 'POST'])
+def show_questions(id):
+	data=getQuestion.get_question('' , False , '%d' %id)
+	if request.method == 'GET':
+		return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3])
+	if request.method == 'POST':
+		if data[2] != unicode(request.form['answer']):
+			return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , error=True)
+		else:
+			return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , success=True)
