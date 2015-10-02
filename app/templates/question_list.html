@@ -5,22 +5,13 @@
 		<div class="custom-container">
 			<div style="min-height:50px;" class="hidden-xs"></div>
 			<div style="padding:0 50px 0;">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h1 class="text-center">{{question_kind}}</h1>
+					</div>
+				</div>
 				<table class="table tabel-striped table-bordered">
-					<caption><h1>排名</h1></caption>
-					<thead>
-						<tr>
-							<th>名次</th>
-							<th>用户名</th>
-							<th>得分</th>
-						</tr>
-						{%for user in users%}
-							<tbody>							
-								<td>{{loop.index}}</td>
-								<td>{{user[0]}}</td>
-								<td>{{user[1]}}</td>
-							</tbody>
-						{%endfor%}		
-					</thead>
+					
 				</table>
 			</div>
 		</div>

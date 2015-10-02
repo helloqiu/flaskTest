@@ -5,6 +5,10 @@ import login
 import register
 import rank
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 @app.route('/' , methods=['GET' , 'POST'])
 @app.route('/login', methods=['GET' , 'POST'])
 def login_view():
@@ -36,3 +40,10 @@ def user_dash_view():
 	data=rank.rank()
 	if request.method == 'GET':
 		return render_template('user_dashboard.html' , users=data)
+	if request.method == 'POST':
+		return render_template('user_dashboard.html' , users=data)
+
+@app.route('/question', methods=['GET' , 'POST'])
+def question():
+	if request.method == 'GET':
+		return render_template('question_list.html' , question_kind='题目1')
