@@ -29,3 +29,8 @@ def register_view():
 				return 'success'
 			else:
 				return render_template('register.html' , error='the username has been registered')
+
+@app.route('/user_dash', methods=['GET' , 'POST'])
+def user_dash_view():
+	if request.method == 'GET':
+		return render_template('user_dashboard.html')
