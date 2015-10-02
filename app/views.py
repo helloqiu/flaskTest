@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from app import app
 from flask import render_template , request
-import login
-import register
-import rank
 import getQuestion
+import user
 
 import sys
 reload(sys)
@@ -17,7 +15,7 @@ def login_view():
 		return render_template("index.html")
 	elif request.method == 'POST':
 		if request.form['username']:
-			if login.login(request.form['username'] , request.form['password']):
+			if user.login(request.form['username'] , request.form['password']):
 				return 'success'
 			else:
 				return 'fail'
@@ -31,14 +29,14 @@ def register_view():
 		if request.form['password'] != request.form['password-repeat']:
 			return render_template('register.html' , error='passwords are not same')
 		else:
-			if register.register(request.form['username'] , request.form['password']):
+			if user.register(request.form['username'] , request.form['password']):
 				return 'success'
 			else:
 				return render_template('register.html' , error='the username has been registered')
 
 @app.route('/user_dash', methods=['GET' , 'POST'])
 def user_dash_view():
-	data=rank.rank()
+	data=user.rank()
 	if request.method == 'GET':
 		return render_template('user_dashboard.html' , users=data)
 	if request.method == 'POST':
