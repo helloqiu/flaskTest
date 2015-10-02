@@ -21,25 +21,41 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
+				{%if kind == 1%}
+				<li class='active'>
+				{%else%}
 				<li>
+				{%endif%}
 					<a href="#">
 						<span class="glyphicon glyphicon-th-large"></span>
 						题目1
 					</a>
 				</li>
+				{%if kind == 2%}
+				<li class='active'>
+				{%else%}
 				<li>
+				{%endif%}
 					<a href="#">
 						<span class="glyphicon glyphicon-th-large"></span>
 						题目2
 					</a>
 				</li>
+				{%if kind == 3%}
+				<li class='active'>
+				{%else%}
 				<li>
+				{%endif%}
 					<a href="#">
 						<span class="glyphicon glyphicon-th-large"></span>
 						题目3
 					</a>
 				</li>
+				{%if kind == 4%}
+				<li class='active'>
+				{%else%}
 				<li>
+				{%endif%}
 					<a href="#">
 						<span class="glyphicon glyphicon-th-large"></span>
 						题目4

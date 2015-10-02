@@ -4,6 +4,7 @@ from flask import render_template , request
 import login
 import register
 import rank
+import getQuestion
 
 import sys
 reload(sys)
@@ -43,7 +44,8 @@ def user_dash_view():
 	if request.method == 'POST':
 		return render_template('user_dashboard.html' , users=data)
 
-@app.route('/question', methods=['GET' , 'POST'])
+@app.route('/question/1', methods=['GET' , 'POST'])
 def question():
+	data=getQuestion.get_question('1')
 	if request.method == 'GET':
-		return render_template('question_list.html' , question_kind='题目1')
+		return render_template('question_list.html' , question_kind='题目1' , questions = data , kind=1)

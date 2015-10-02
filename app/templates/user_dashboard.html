@@ -13,14 +13,16 @@
 							<th>用户名</th>
 							<th>得分</th>
 						</tr>
+					</thead>
+					<tbody>	
 						{%for user in users%}
-							<tbody>							
+							<tr>
 								<td>{{loop.index}}</td>
 								<td>{{user[0]}}</td>
 								<td>{{user[1]}}</td>
-							</tbody>
+							</tr>	
 						{%endfor%}		
-					</thead>
+					</tbody>
 				</table>
 			</div>
 		</div>
