@@ -64,6 +64,9 @@
 								<input type="password" class="form-control" placeholder="password" name="password"></input>
 							</div>
 						</div>
+						{%if error%}
+						<p class="text-danger">用户名或密码不正确</p>
+						{%endif%}
 						<div style="padding:20px 0 10px;">
 							<button type="submit" class="btn btn-success btn-lg btn-block">登陆</button>
 						</div>

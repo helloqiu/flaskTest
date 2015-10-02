@@ -7,7 +7,7 @@ def get_question(kind , titleOnly=True , num = '0'):
 		cur.close()
 		return rv
 	else:
-		query='select title,content,answer,kind from question where num = ' + num + ' order by score desc'
+		query='select title,content,answer,kind,score from question where num = ' + num + ' order by score desc'
 		cur = sqlite3_db.connect_db().execute(query)
 		rv = cur.fetchall()
 		cur.close()

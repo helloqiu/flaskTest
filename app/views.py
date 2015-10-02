@@ -16,9 +16,9 @@ def login_view():
 	elif request.method == 'POST':
 		if request.form['username']:
 			if user.login(request.form['username'] , request.form['password']):
-				return 'success'
+				return user_dash_view()
 			else:
-				return 'fail'
+				return render_template("index.html" , error=True)
 		else:
 			return 'Fail'
 @app.route('/register', methods=['GET' , 'POST'])
@@ -38,9 +38,9 @@ def register_view():
 def user_dash_view():
 	data=user.rank()
 	if request.method == 'GET':
-		return render_template('user_dashboard.html' , users=data)
+		return render_template('user_dashboard.html' , users=data )
 	if request.method == 'POST':
-		return render_template('user_dashboard.html' , users=data)
+		return render_template('user_dashboard.html' , users=data )
 
 @app.route('/question/<int:kind>', methods=['GET' , 'POST'])
 def question(kind):
@@ -54,7 +54,12 @@ def show_questions(id):
 	if request.method == 'GET':
 		return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3])
 	if request.method == 'POST':
-		if data[2] != unicode(request.form['answer']):
-			return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , error=True)
+		if user.login(request.form['username'] , request.form['password']):
+			if data[2] != unicode(request.form['answer']):
+				return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , error=True)
+			else:
+				user.add_score(request.form['username'],data[4])
+				return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , success=True)
 		else:
-			return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , success=True)
+			return render_template('question.html' , question_title=data[0] , question_content=data[1] , kind=data[3] , loginError=True)
+		

@@ -32,3 +32,14 @@ def login(username , password):
 			return True
 		else:
 			return False
+def add_score(username , score):
+	query1 = 'select score from user where username = \'' + username + '\''
+	cur = sqlite3_db.connect_db().execute(query1)
+	rv = cur.fetchall()
+	cur.close()
+	nowScore = rv[0][0]
+	query = 'update user set score = ' + '%d' %(nowScore + score) + ' where username = \'' + username + '\''
+	db = sqlite3_db.connect_db()
+	db.execute(query)
+	db.commit()
+
