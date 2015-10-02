@@ -4,7 +4,6 @@ def login(username , password):
 	cur = sqlite3_db.connect_db().execute(query)
 	rv = cur.fetchall()
 	cur.close()
-	rv = rv[0] if rv else None
 	if rv is None:
 		return False
 	else:

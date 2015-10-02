@@ -3,6 +3,7 @@ from app import app
 from flask import render_template , request
 import login
 import register
+import rank
 
 @app.route('/' , methods=['GET' , 'POST'])
 @app.route('/login', methods=['GET' , 'POST'])
@@ -32,5 +33,6 @@ def register_view():
 
 @app.route('/user_dash', methods=['GET' , 'POST'])
 def user_dash_view():
+	data=rank.rank()
 	if request.method == 'GET':
-		return render_template('user_dashboard.html')
+		return render_template('user_dashboard.html' , users=data)
