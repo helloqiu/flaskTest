@@ -3,8 +3,10 @@ from app import app
 from flask import render_template, request
 import getQuestion
 import user
-
+from myForm import LoginForm
 import sys
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -12,14 +14,15 @@ sys.setdefaultencoding('utf8')
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login_view():
+    loginForm = LoginForm()
     if request.method == 'GET':
-        return render_template("index.html")
+        return render_template("index.html", form=loginForm)
     elif request.method == 'POST':
         if request.form['username']:
             if user.login(request.form['username'], request.form['password']):
                 return user_dash_view()
             else:
-                return render_template("index.html", error=True)
+                return render_template("index.html", error=True, form=loginForm)
         else:
             return 'Fail'
 
