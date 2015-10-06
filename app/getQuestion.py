@@ -4,7 +4,7 @@ import string
 
 def get_question(kind, titleOnly=True, num='0'):
     if titleOnly:
-        query = 'select title,score from question where kind = %s order by score desc' % kind
+        query = 'select title,score,num from question where kind = %s order by score desc' % kind
         cur = sqlite3_db.connect_db().execute(query)
         rv = cur.fetchall()
         cur.close()
