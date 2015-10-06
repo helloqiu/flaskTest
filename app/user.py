@@ -15,7 +15,7 @@ def register(username , password):
 		return False
 
 def rank():
-	query='select username,score from user order by score desc'
+	query='select username,score from user order by score desc limit 0,20'
 	cur = sqlite3_db.connect_db().execute(query)
 	rv = cur.fetchall()
 	cur.close()
