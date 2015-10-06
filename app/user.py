@@ -1,11 +1,14 @@
 import sqlite3_db
+import hashlib
 def register(username , password):
 	query = 'select password from user where username = \'%s\'' %username
 	cur = sqlite3_db.connect_db().execute(query)
 	rv = cur.fetchall()
 	cur.close()
 	if not rv:
-		#query = 'insert into user values(\'' + username + '\',\'' + password + '\', 0,0)';
+		encrypt = hashlib.md5()
+		encrypt.update(password)
+		password = encrypt.hexdigest()
 		query = 'insert into user values(\'%s\' , \'%s\' , 0,0)' %(username , password)
 		db = sqlite3_db.connect_db()
 		db.execute(query)
@@ -22,6 +25,9 @@ def rank():
 	return rv
 
 def login(username , password):
+	encrypt = hashlib.md5()
+	encrypt.update(password)
+	password = encrypt.hexdigest()
 	query = 'select password from user where username = \'%s\'' %username
 	cur = sqlite3_db.connect_db().execute(query)
 	rv = cur.fetchall()
