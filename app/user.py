@@ -1,5 +1,6 @@
 import sqlite3_db
 import hashlib
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def register(username, password):
@@ -8,9 +9,10 @@ def register(username, password):
     rv = cur.fetchall()
     cur.close()
     if not rv:
-        encrypt = hashlib.md5()
-        encrypt.update(password)
-        password = encrypt.hexdigest()
+        #encrypt = hashlib.md5()
+        # encrypt.update(password)
+        #password = encrypt.hexdigest()
+        password = generate_password_hash(password)
         query = 'insert into user values(\'%s\' , \'%s\' , 0,0)' % (
             username, password)
         db = sqlite3_db.connect_db()
@@ -30,9 +32,9 @@ def rank():
 
 
 def login(username, password):
-    encrypt = hashlib.md5()
-    encrypt.update(password)
-    password = encrypt.hexdigest()
+    #encrypt = hashlib.md5()
+    # encrypt.update(password)
+    #password = encrypt.hexdigest()
     query = 'select password from user where username = \'%s\'' % username
     cur = sqlite3_db.connect_db().execute(query)
     rv = cur.fetchall()
@@ -40,7 +42,8 @@ def login(username, password):
     if rv is None:
         return False
     else:
-        if rv[0][0] == unicode(password):
+        # if rv[0][0] == unicode(password):
+        if check_password_hash(rv[0][0], password):
             return True
         else:
             return False
