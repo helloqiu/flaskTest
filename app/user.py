@@ -9,9 +9,6 @@ def register(username, password):
     rv = cur.fetchall()
     cur.close()
     if not rv:
-        #encrypt = hashlib.md5()
-        # encrypt.update(password)
-        #password = encrypt.hexdigest()
         password = generate_password_hash(password)
         query = 'insert into user values(\'%s\' , \'%s\' , 0,0)' % (
             username, password)
@@ -32,9 +29,6 @@ def rank():
 
 
 def login(username, password):
-    #encrypt = hashlib.md5()
-    # encrypt.update(password)
-    #password = encrypt.hexdigest()
     query = 'select password from user where username = \'%s\'' % username
     cur = sqlite3_db.connect_db().execute(query)
     rv = cur.fetchall()
